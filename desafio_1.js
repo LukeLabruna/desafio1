@@ -6,11 +6,18 @@ class ProductManager {
   }
 
   addProduct(title, description, price, thumbnail, code, stock) {
+
+    const productExists = this.products.some(i => i.code === code)
     
-    if (this.products.some(i => i.code === code)) {
+    if (productExists) {
       console.error("Product already exist")
       return
-    }
+    } 
+
+    if (!title || !description || !price || !thumbnail || !code || !stock) {
+      console.error("Product missing fields")
+      return
+    } 
 
     const id = this.nextId++
 
